@@ -63,5 +63,29 @@ public class ClientBusinessTest {
 		Client client = new Client("YO", "885588822", "88552244");
 		clientBusiness.create(client);
 	}
+	
+	@Test( enabled = true,
+		   description = "This test should capture an exception of the invalid null name from the client",
+		   expectedExceptions = { InvalidClientException.class })
+	public void testFailureOnCreateClientWithNullName() throws InvalidClientException{
+		Client client = new Client( null , "885588822", "88552244");
+		clientBusiness.create(client);
+	}
+	
+	@Test( enabled = true,
+		   description = "This test should capture an exception of the invalid null phone from the client",
+		   expectedExceptions = { InvalidClientException.class } )
+	public void testFailureOnCreateClientWithNullPhone() throws InvalidClientException{
+		Client client = new Client( "Hello CLient" , null , "88552244");
+		clientBusiness.create(client);
+	}
+	
+	@Test( enabled = true,
+		   description = "This test should capture an exception of the invalid phone number with less than 8 characters",
+		   expectedExceptions = { InvalidClientException.class }  )
+	public void testFailureOnCreateClientWithPhoneWithLessThanEightCharacters() throws InvalidClientException{
+		Client client = new Client( "Hello CLient" , "889922" , "88552244");
+		clientBusiness.create(client);
+	}
 
 }
